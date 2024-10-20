@@ -7,11 +7,13 @@ language Object Pascal  (Freepascal(Lazarus) / Delphi)
 All changes to original library are in the branch "pascal"
 
 pascal_src    contains the pascal implementation of libgrapheme.
+
 pascal_gen    modified source C codes to generate pascal include files.
+
 pascal_test   tests ported to pascal.
 
 
-To rebuild (not required to use the package) the pascal include files we need a c compiler. Tested with gcc 13.2.0
+To rebuild (not required to use the package) the pascal include files, we need a c compiler. Tested with gcc 13.2.0
 
 **Since github don't allow files bigger than 100 MB if we want to run the tests we need to generate the include files.**
 

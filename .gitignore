@@ -96,3 +96,44 @@ modules/
 *.app/
 
 # End of https://www.gitignore.io/api/delphi,lazarus
+
+#ignore generated files
+
+config.mk
+gen/bidirectional-test.h
+gen/bidirectional.h
+gen/case.h
+gen/character-test.h
+gen/character.h
+gen/line.h
+gen/sentence.h
+gen/word.h
+man/grapheme_decode_utf8.3
+man/grapheme_encode_utf8.3
+man/grapheme_is_character_break.3
+man/grapheme_is_lowercase.3
+man/grapheme_is_lowercase_utf8.3
+man/grapheme_is_titlecase.3
+man/grapheme_is_titlecase_utf8.3
+man/grapheme_is_uppercase.3
+man/grapheme_is_uppercase_utf8.3
+man/grapheme_next_character_break.3
+man/grapheme_next_character_break_utf8.3
+man/grapheme_next_line_break.3
+man/grapheme_next_line_break_utf8.3
+man/grapheme_next_sentence_break.3
+man/grapheme_next_sentence_break_utf8.3
+man/grapheme_next_word_break.3
+man/grapheme_next_word_break_utf8.3
+man/grapheme_to_lowercase.3
+man/grapheme_to_lowercase_utf8.3
+man/grapheme_to_titlecase.3
+man/grapheme_to_titlecase_utf8.3
+man/grapheme_to_uppercase.3
+man/grapheme_to_uppercase_utf8.3
+man/libgrapheme.7
+pascal_test/bidirectional-test.inc
+pascal_test/character-test.inc
+pascal_test/line-test.inc
+pascal_test/sentence-test.inc
+pascal_test/word-test.inc

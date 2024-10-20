@@ -1,0 +1,124 @@
+object Form1: TForm1
+  Left = 330
+  Height = 316
+  Top = 250
+  Width = 1040
+  Caption = 'Form1'
+  ClientHeight = 316
+  ClientWidth = 1040
+  LCLVersion = '4.99.0.0'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  object MemoPascal: TMemo
+    Left = 25
+    Height = 193
+    Top = 111
+    Width = 479
+    Anchors = [akTop, akLeft, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Name = 'Segoe UI Emoji'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+    OnChange = MemoPascalChange
+  end
+  object btnCodePoints: TButton
+    Left = 384
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Codepoints'
+    TabOrder = 1
+    OnClick = btnCodePointsClick
+  end
+  object Edit1: TEdit
+    Left = 24
+    Height = 25
+    Top = 40
+    Width = 333
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Emoji'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 2
+    Text = 'x🟡(m) Camión 🐵 🐈 test.'
+  end
+  object btnLowerCase: TButton
+    Left = 592
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Lower case'
+    TabOrder = 3
+    OnClick = btnLowerCaseClick
+  end
+  object btnGraphemeOriginal: TButton
+    Left = 480
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Graphemes'
+    TabOrder = 4
+    OnClick = btnGraphemeOriginalClick
+  end
+  object MemoC: TMemo
+    Left = 544
+    Height = 193
+    Top = 111
+    Width = 479
+    Anchors = [akTop, akLeft, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Name = 'Segoe UI Emoji'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    ScrollBars = ssAutoBoth
+    TabOrder = 5
+    OnChange = MemoPascalChange
+  end
+  object Label1: TLabel
+    Left = 28
+    Height = 15
+    Top = 88
+    Width = 74
+    Caption = 'Pascal version'
+  end
+  object Label2: TLabel
+    Left = 544
+    Height = 15
+    Top = 88
+    Width = 49
+    Caption = 'C version'
+  end
+  object btnUpperCase: TButton
+    Left = 688
+    Height = 25
+    Top = 40
+    Width = 75
+    Caption = 'Upper case'
+    TabOrder = 6
+    OnClick = btnUpperCaseClick
+  end
+  object btnTitleCase: TButton
+    Left = 808
+    Height = 25
+    Top = 42
+    Width = 75
+    Caption = 'Title case'
+    TabOrder = 7
+    OnClick = btnTitleCaseClick
+  end
+  object Button1: TButton
+    Left = 944
+    Height = 25
+    Top = 42
+    Width = 75
+    Caption = 'Button1'
+    TabOrder = 8
+    OnClick = Button1Click
+  end
+end

@@ -1,5 +1,11 @@
 ISC-License
 
+Object Pascal translation of the libgraphene library plus some additions: 
+changes in pascal* folders.
+Copyright 2024 Domingo Galmés <dgalmesp@gmail.com>
+
+Original license of the C version read below.
+
 Copyright 2019-2022 Laslo Hunhold <dev@frign.de>
 
 Permission to use, copy, modify, and/or distribute this software for any

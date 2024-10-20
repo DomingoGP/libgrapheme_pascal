@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="grapheme"/>
+    <Type Value="RunTimeOnly"/>
+    <Author Value="Laslo Hunhold &lt;dev@frign.de>  ported to pascal by  Domingo Galmés &lt;dgalmesp@gmail.com>"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Description Value="pascal port of lbgrapheme https://libs.suckless.org/libgrapheme/"/>
+    <License Value="ISC-License
+
+Object Pascal translation of the libgraphene library plus some additions: 
+changes in pascal* folders.
+Copyright 2024 Domingo Galmés &lt;dgalmesp@gmail.com>
+
+Original license of the C version read below.
+
+Copyright 2019-2022 Laslo Hunhold &lt;dev@frign.de>
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+"/>
+    <Version Major="2" Release="2"/>
+    <Files Count="16">
+      <Item1>
+        <Filename Value="grapheme_bidirectional.pas"/>
+        <UnitName Value="grapheme_bidirectional"/>
+      </Item1>
+      <Item2>
+        <Filename Value="grapheme_case.pas"/>
+        <UnitName Value="grapheme_case"/>
+      </Item2>
+      <Item3>
+        <Filename Value="grapheme_character.pas"/>
+        <UnitName Value="grapheme_character"/>
+      </Item3>
+      <Item4>
+        <Filename Value="grapheme_dynamic.pas"/>
+        <UnitName Value="grapheme_dynamic"/>
+      </Item4>
+      <Item5>
+        <Filename Value="grapheme_gen_bidirectional.inc"/>
+        <Type Value="Include"/>
+      </Item5>
+      <Item6>
+        <Filename Value="grapheme_gen_case.inc"/>
+        <Type Value="Include"/>
+      </Item6>
+      <Item7>
+        <Filename Value="grapheme_gen_character.inc"/>
+        <Type Value="Include"/>
+      </Item7>
+      <Item8>
+        <Filename Value="grapheme_gen_line.inc"/>
+        <Type Value="Include"/>
+      </Item8>
+      <Item9>
+        <Filename Value="grapheme_gen_sentence.inc"/>
+        <Type Value="Include"/>
+      </Item9>
+      <Item10>
+        <Filename Value="grapheme_gen_word.inc"/>
+        <Type Value="Include"/>
+      </Item10>
+      <Item11>
+        <Filename Value="grapheme_line.pas"/>
+        <UnitName Value="grapheme_line"/>
+      </Item11>
+      <Item12>
+        <Filename Value="grapheme_sentence.pas"/>
+        <UnitName Value="grapheme_sentence"/>
+      </Item12>
+      <Item13>
+        <Filename Value="grapheme_types.pas"/>
+        <UnitName Value="grapheme_types"/>
+      </Item13>
+      <Item14>
+        <Filename Value="grapheme_utf8.pas"/>
+        <UnitName Value="grapheme_utf8"/>
+      </Item14>
+      <Item15>
+        <Filename Value="grapheme_util.pas"/>
+        <UnitName Value="grapheme_util"/>
+      </Item15>
+      <Item16>
+        <Filename Value="grapheme_word.pas"/>
+        <UnitName Value="grapheme_word"/>
+      </Item16>
+    </Files>
+    <CompatibilityMode Value="True"/>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

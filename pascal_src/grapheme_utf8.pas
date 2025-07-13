@@ -16,6 +16,8 @@ function graphemeCopyCodePoints(const AStr:RawByteString;ACountCodePoints:intege
 function graphemeCopyCodePoints(const AStr:PAnsiChar;ALenght:SizeInt; ACountCodePoints:integer):RawByteString;overload;
 function graphemePosCodePoints(const Substr: RawByteString; const Source: RawByteString; Offset: SizeInt = 1 ): SizeInt;
 function graphemeCodePointToChars(const AStr: RawByteString; CodePointIndex: SizeInt = 1 ): SizeInt;
+//procedure graphemeUtf8ToCodePointsList(const AUTF8String: string; ACPL: TCardinalList);
+
 
 implementation
 
@@ -407,6 +409,31 @@ begin
     result := -1;
 end;
 
+{
+I don't want to add a dependencie to IntegerList here.
+
+uses
+  IntegerList
+
+procedure graphemeUtf8ToCodePointsList(const AUTF8String: string; ACPL: TCardinalList);
+var
+  p: pchar;
+  codepoint: uint_least32_t;
+  glen,slen,tlen: integer;
+begin
+  p := PChar(AUTF8String);
+  slen:=length(AUTF8String);
+  while slen>0 do
+  begin
+   glen := grapheme_decode_utf8(p,sLen,@codepoint);
+   if (glen = 0) or (glen > slen) then
+     break;
+   ACPL.Add(codepoint);
+   Inc(p, glen);
+   Dec(slen,glen)
+  end;
+end;
+}
 
 end.
 

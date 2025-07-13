@@ -18,6 +18,7 @@ function graphemeCopyGraphemes(const Astr: rawbytestring; ACountGraphemes: integ
 function graphemeCopyGraphemes(const Astr: pansichar; ALenght: SizeInt; ACountGraphemes: integer): rawbytestring; overload;
 function graphemePosGraphemes(const Substr: rawbytestring; const Source: rawbytestring; Offset: SizeInt = 1): SizeInt;
 function graphemeGraphemeToChars(const Astr: rawbytestring; GraphemeIndex: SizeInt = 1): SizeInt;
+procedure graphemeUtf8ToGraphemesList(const Astr: rawbytestring; AGL: TStrings);
 
 
 implementation
@@ -411,6 +412,25 @@ begin
   end;
   if GraphemeIndex > 1 then
     Result := -1;
+end;
+
+procedure graphemeUtf8ToGraphemesList(const Astr: rawbytestring; AGL: TStrings);
+var
+  p: pchar;
+  glen, slen, tlen: integer;
+begin
+  p := PChar(Astr);
+  slen := length(Astr);
+  tlen := 0;
+  while tlen < slen do
+  begin
+    glen := grapheme_next_character_break_utf8(p, slen);
+    Inc(tlen, glen);
+    if glen = 0 then
+      break;
+    AGL.Add(Copy(p, 0, glen));
+    Inc(p, glen);
+  end;
 end;
 
 

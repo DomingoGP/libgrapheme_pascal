@@ -105,7 +105,7 @@ function proper_advance(p: PProper): integer;
 implementation
 
 uses
-  Math, grapheme_utf8, grapheme_word;
+  Math, grapheme_utf8;
 
 procedure herodotus_reader_init(r: PHERODOTUS_READER; AType: herodotus_type; const src: Pointer; srclen: size_t);
 var

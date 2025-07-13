@@ -6,14 +6,18 @@ unit grapheme_word;
 interface
 
 uses
-  Classes, SysUtils, grapheme_types;
+  Classes, SysUtils, grapheme_types, grapheme_util;
 
 function grapheme_next_word_break(const str: Puint_least32_t; len: size_t): size_t;cdecl;
 function grapheme_next_word_break_utf8(const str: pansichar; len: size_t): size_t;cdecl;
 
+//function moved from grapheme_util to minimize files to include.
+function herodotus_reader_next_word_break(const r: PHERODOTUS_READER): size_t;
+
+
 implementation
 uses
-  grapheme_util;
+  Math; //grapheme_util;
 
 {$I grapheme_gen_word.inc}
 
@@ -266,6 +270,20 @@ begin
   herodotus_reader_init(@r, HERODOTUS_TYPE_UTF8, str, len);
 
   exit(next_word_break(@r));
+end;
+
+// moved from grapheme_util to minimize inclusion size if not needed.
+function herodotus_reader_next_word_break(const r: PHERODOTUS_READER): size_t;
+begin
+  if r^._type = HERODOTUS_TYPE_CODEPOINT then
+  begin
+    exit(grapheme_next_word_break(Puint_least32_t(r^.src) + r^.off, min(r^.srclen, r^.soft_limit[0]) - r^.off));
+  end
+  else
+  begin
+    {* r->type == HERODOTUS_TYPE_UTF8 *}
+    exit(grapheme_next_word_break_utf8(pansichar(r^.src) + r^.off, min(r^.srclen, r^.soft_limit[0]) - r^.off));
+  end;
 end;
 
 end.

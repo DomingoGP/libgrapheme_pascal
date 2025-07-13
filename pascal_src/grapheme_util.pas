@@ -89,7 +89,8 @@ procedure herodotus_reader_init(r: PHERODOTUS_READER; AType: herodotus_type; con
 procedure herodotus_reader_copy(const src: PHERODOTUS_READER; dest: PHERODOTUS_READER);
 procedure herodotus_reader_push_advance_limit(r: PHERODOTUS_READER; Count: size_t);
 procedure herodotus_reader_pop_limit(r: PHERODOTUS_READER);
-function herodotus_reader_next_word_break(const r: PHERODOTUS_READER): size_t;
+//function moved to grapheme_word to minimize files to include.
+//function herodotus_reader_next_word_break(const r: PHERODOTUS_READER): size_t;
 function herodotus_reader_next_codepoint_break(const r: PHERODOTUS_READER): size_t;
 function herodotus_reader_number_read(const r: PHERODOTUS_READER): size_t;
 function herodotus_read_codepoint(r: PHERODOTUS_READER; advance: boolean; cp: Puint_least32_t): herodotus_status;
@@ -213,6 +214,7 @@ begin
   r^.soft_limit[length(r^.soft_limit) - 1] := SIZE_MAX;
 end;
 
+(* moved to grapheme_word to minimize inclusion size if not needed.
 function herodotus_reader_next_word_break(const r: PHERODOTUS_READER): size_t;
 begin
   if r^._type = HERODOTUS_TYPE_CODEPOINT then
@@ -225,6 +227,7 @@ begin
     exit(grapheme_next_word_break_utf8(pansichar(r^.src) + r^.off, min(r^.srclen, r^.soft_limit[0]) - r^.off));
   end;
 end;
+*)
 
 function herodotus_reader_next_codepoint_break(const r: PHERODOTUS_READER): size_t;
 begin

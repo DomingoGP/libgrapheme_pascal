@@ -567,10 +567,14 @@ begin
   Result := '';
   if len <= 0 then
     exit;
-  //calc result len
-  len2 := grapheme_to_uppercase_utf8(@src[1], len, nil, 0);
+  //assume same length by defeault
+  SetLength(Result,len);
+  len2 := grapheme_to_uppercase_utf8(@src[1], len, @Result[1], len+1);
+  if len2 = len then
+    exit;
   SetLength(Result, len2);
-  grapheme_to_uppercase_utf8(@src[1], len, @Result[1], len2+1);
+  if len2 > len then
+    grapheme_to_uppercase_utf8(@src[1], len, @Result[1], len2+1);
 end;
 
 function graphemeLowerCase(const src: rawbytestring): rawbytestring;
@@ -581,10 +585,14 @@ begin
   Result := '';
   if len <= 0 then
     exit;
-  //calc result len
-  len2 := grapheme_to_lowercase_utf8(@src[1], len, nil, 0);
+  //assume same length by defeault
+  SetLength(Result,len);
+  len2 := grapheme_to_lowercase_utf8(@src[1], len, @Result[1], len+1);
+  if len2 = len then
+    exit;
   SetLength(Result, len2);
-  grapheme_to_lowercase_utf8(@src[1], len, @Result[1], len2+1);
+  if len2 > len then
+    grapheme_to_lowercase_utf8(@src[1], len, @Result[1], len2+1);
 end;
 
 function graphemeTitleCase(const src: rawbytestring): rawbytestring;
@@ -595,10 +603,14 @@ begin
   Result := '';
   if len <= 0 then
     exit;
-  //calc result len
-  len2 := grapheme_to_titlecase_utf8(@src[1], len, nil, 0);
+  //assume same length by defeault
+  SetLength(Result,len);
+  len2 := grapheme_to_titlecase_utf8(@src[1], len, @Result[1], len+1);
+  if len2 = len then
+    exit;
   SetLength(Result, len2);
-  grapheme_to_titlecase_utf8(@src[1], len, @Result[1], len2+1);
+  if len2 > len then
+    grapheme_to_titlecase_utf8(@src[1], len, @Result[1], len2+1);
 end;
 
 end.

@@ -156,6 +156,24 @@ begin
   SetLength(s2,len2);
   grapheme_to_lowercase_utf8(@s[1],len,@s2[1],len2+1);
   MemoPascal.Lines.Add(s2);
+
+  SetLength(s2,len); // assume same length by default
+  len2:=grapheme_to_lowercase_utf8(@s[1],len,@s2[1],len+1);
+  if len2<len then
+    SetLength(S2,len2)
+  else if len2>len then
+  begin
+    SetLength(s2,len2);
+    len2:=grapheme_to_lowercase_utf8(@s[1],len,@s2[1],len+1);
+  end;
+   MemoPascal.Lines.Add(s2);
+
+   MemoPascal.Lines.Add('-- HL functions --');
+
+   MemoPascal.Lines.Add(graphemeLowerCase(s));
+   MemoPascal.Lines.Add(graphemeUpperCase(s));
+   MemoPascal.Lines.Add(graphemeTitleCase(s));
+
 end;
 
 procedure TForm1.btnTitleCaseClick(Sender: TObject);

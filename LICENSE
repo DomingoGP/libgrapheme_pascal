@@ -1,8 +1,8 @@
 ISC-License
 
-Object Pascal translation of the libgraphene library plus some additions: 
+Object Pascal port of the libgraphene library plus some additions: 
 changes in pascal* folders.
-Copyright 2024 Domingo Galmés <dgalmesp@gmail.com>
+Copyright 2024-2025 Domingo Galmés <dgalmesp@gmail.com>
 
 Original license of the C version read below.
 
@@ -19,3 +19,12 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Home page:
+
+Port to pascal
+https://github.com/DomingoGP/libgrapheme_pascal
+
+Original C library
+https://git.suckless.org/libgrapheme/
+

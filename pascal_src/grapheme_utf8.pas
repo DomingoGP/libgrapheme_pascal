@@ -32,6 +32,8 @@ https://git.suckless.org/libgrapheme/
 unit grapheme_utf8;
 
 {$ifdef FPC}{$mode delphi}{$endif}
+{$RANGECHECKS OFF}
+{$OVERFLOWCHECKS OFF}
 
 interface
 

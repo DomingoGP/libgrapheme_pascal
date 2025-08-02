@@ -40,6 +40,8 @@ https://git.suckless.org/libgrapheme/
 unit grapheme_sentence;
 
 {$ifdef FPC}{$mode delphi}{$endif}
+{$RANGECHECKS OFF}
+{$OVERFLOWCHECKS OFF}
 
 interface
 

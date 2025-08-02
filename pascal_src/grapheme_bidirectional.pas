@@ -32,6 +32,9 @@ https://git.suckless.org/libgrapheme/
 unit grapheme_bidirectional;
 
 {$ifdef FPC}{$mode delphi}{$endif}
+{$RANGECHECKS OFF}
+{$OVERFLOWCHECKS OFF}
+
 interface
 
 uses

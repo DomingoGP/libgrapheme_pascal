@@ -53,17 +53,18 @@ type
     GRAPHEME_BIDIRECTIONAL_DIRECTION_RTL
     );
 
+  size_t = nativeuint;
   Psize_t = ^size_t;
-  Puint_least32_t = PUInt32;
+  Puint_least32_t = puint32;
   uint_least32_t = uint32;
-  Pint_least32_t = PInt32;
+  Pint_least32_t = pint32;
   int_least32_t = int32;
-  Puint_least16_t = PUInt16;
+  Puint_least16_t = puint16;
   uint_least16_t = uint16;
-  Pint_least16_t = PInt16;
+  Pint_least16_t = pint16;
   int_least16_t = int16;
   uint_least8_t = uint8;
-  Pint_least8_t = PInt8;
+  Pint_least8_t = pint8;
   int_least8_t = int8;
 
 

@@ -9,6 +9,7 @@ uses
 
 type
   TForm1 = class(TForm)
+    btlLower: TButton;
     btnGraphemeOriginal: TButton;
     btnCodePoints: TButton;
     btnLowerCase: TButton;
@@ -20,6 +21,7 @@ type
     Label2: TLabel;
     MemoPascal: TMemo;
     MemoC: TMemo;
+    procedure btlLowerClick(Sender: TObject);
     procedure btnGraphemeOriginalClick(Sender: TObject);
     procedure btnCodePointsClick(Sender: TObject);
     procedure btnLowerCaseClick(Sender: TObject);
@@ -41,7 +43,7 @@ var
 implementation
 
 uses
-  grapheme_dynamic,grapheme_utf8,grapheme_character,grapheme_case;
+  grapheme_dynamic,grapheme_utf8,grapheme_character,grapheme_case,LazUtf8;
 
 {$R *.lfm}
 
@@ -314,5 +316,14 @@ begin
 
 
 end;
+
+procedure TForm1.btlLowerClick(Sender: TObject);
+begin
+  MemoPascal.Lines.Clear;
+  MemoPascal.Lines.Add('lowercase(x) -->'+lowercase(Edit1.Text));
+  MemoPascal.Lines.Add('UTF8LowerCase((x) -->'+UTF8LowerCase(Edit1.Text));
+  MemoPascal.Lines.Add('graphemeLowerCase((x) -->'+graphemeLowerCase(Edit1.Text));
+end;
+
 end.
 

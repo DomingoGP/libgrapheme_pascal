@@ -54,6 +54,29 @@ function graphemePosGraphemes(const Substr: rawbytestring; const Source: rawbyte
 function graphemeGraphemeToChars(const Astr: rawbytestring; GraphemeIndex: SizeInt = 1): SizeInt;
 procedure graphemeUtf8ToGraphemesList(const Astr: rawbytestring; AGL: TStrings);
 
+type
+  graphemeCharBreakProperty = (
+	cbpOTHER,
+	cbpPROP_CONTROL,
+	cbpCR,
+	cbpEXTEND,
+	cbpEXTENDED_PICTOGRAPHIC,
+	cbpHANGUL_L,
+	cbpHANGUL_V,
+	cbpHANGUL_T,
+	cbpHANGUL_LV,
+	cbpHANGUL_LVT,
+	cbpLF,
+	cbpPREPEND,
+	cbpREGIONAL_INDICATOR,
+	cbpSPACINGMARK,
+	cbpZWJ,
+	cbpNUM_CHAR_BREAK_PROPS
+  );
+
+function graphemeGetCharBreakProperty(cp: uint_least32_t):graphemeCharBreakProperty;
+function graphemeIsEmoji(cp: uint_least32_t):boolean;
+
 
 implementation
 
@@ -467,6 +490,15 @@ begin
   end;
 end;
 
+function graphemeGetCharBreakProperty(cp: uint_least32_t):graphemeCharBreakProperty;
+begin
+  result := graphemeCharBreakProperty(get_break_prop(cp));
+end;
+
+function graphemeIsEmoji(cp: uint_least32_t):boolean;
+begin
+  result := graphemeGetCharBreakProperty(cp) = cbpEXTENDED_PICTOGRAPHIC;
+end;
 
 initialization
   {$PUSH}

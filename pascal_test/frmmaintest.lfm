@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 316
   Top = 250
   Width = 1040
-  Caption = 'Form1'
+  Caption = 'Test libgrapheme, requires libgrapheme.dll to compare with C version.'
   ClientHeight = 316
   ClientWidth = 1040
   LCLVersion = '4.99.0.0'
@@ -59,7 +59,7 @@ object Form1: TForm1
   object btnGraphemeOriginal: TButton
     Left = 480
     Height = 25
-    Top = 40
+    Top = 24
     Width = 75
     Caption = 'Graphemes'
     TabOrder = 4
@@ -129,5 +129,14 @@ object Form1: TForm1
     Caption = 'Lower'
     TabOrder = 9
     OnClick = btlLowerClick
+  end
+  object btnGraphemes2: TButton
+    Left = 480
+    Height = 25
+    Top = 56
+    Width = 75
+    Caption = 'Graphemes 2'
+    TabOrder = 10
+    OnClick = btnGraphemes2Click
   end
 end

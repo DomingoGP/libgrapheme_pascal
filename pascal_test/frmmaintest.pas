@@ -2,6 +2,8 @@ unit frmMainTest;
 
 {$mode objfpc}{$H+}
 
+{.$define COMPARE_TO_C}    //requires dynamic link library
+
 interface
 
 uses
@@ -12,6 +14,7 @@ type
     btlLower: TButton;
     btnGraphemeOriginal: TButton;
     btnCodePoints: TButton;
+    btnGraphemes2: TButton;
     btnLowerCase: TButton;
     btnTitleCase: TButton;
     btnUpperCase: TButton;
@@ -24,6 +27,7 @@ type
     procedure btlLowerClick(Sender: TObject);
     procedure btnGraphemeOriginalClick(Sender: TObject);
     procedure btnCodePointsClick(Sender: TObject);
+    procedure btnGraphemes2Click(Sender: TObject);
     procedure btnLowerCaseClick(Sender: TObject);
     procedure btnTitleCaseClick(Sender: TObject);
     procedure btnUpperCaseClick(Sender: TObject);
@@ -43,7 +47,11 @@ var
 implementation
 
 uses
-  grapheme_dynamic,grapheme_utf8,grapheme_character,grapheme_case,LazUtf8;
+  // Don't change order.
+  {$ifdef COMPARE_TO_C}
+  grapheme_dynamic,
+  {$endif}
+  grapheme_utf8,grapheme_character,grapheme_case,LazUtf8;
 
 {$R *.lfm}
 
@@ -82,7 +90,9 @@ begin
   MemoPascal.Lines.Clear;
   wStr:=Edit1.Text;
   len:=length(wStr);
+  {$ifdef COMPARE_TO_C}
   MemoC.Lines.Add(Format('(Length: %d ) %s',[len,ToHex(wStr)]));
+  {$endif}
   MemoPascal.Lines.Add(Format('(Length: %d)  %s',[len,ToHex(wStr)]));
 
   wR:='';
@@ -110,6 +120,7 @@ begin
   MemoPascal.Lines.Add(wR);
   MemoPascal.Lines.Add(Format('Count: %d',[count]));
 
+  {$ifdef COMPARE_TO_C}
   wR:='';
   count:=0;
   off:=1;
@@ -134,9 +145,41 @@ begin
   end;
   MemoC.Lines.Add(wR);
   MemoC.Lines.Add(Format('Count: %d',[count]));
+  {$endif}
 end;
 
+procedure TForm1.btnGraphemes2Click(Sender: TObject);
+var
+  len, off, Count: integer;
+  ret: size_t;
+  s: ansistring;
+  CodePointsCount: size_t;
+begin
+  s := Edit1.Text;
+  len := length(s);
 
+  off := 0;
+  Count := 0;
+
+  // test empty string
+  CodePointsCount := 9999;
+  grapheme_next_character_break_utf8(@s[1 + off], 0, CodePointsCount);
+  if CodePointsCount <> 0 then
+    ShowMessage('Error unexpected CodePointsCount');
+
+  MemoC.Lines.Clear;
+  MemoPascal.Lines.Clear;
+  MemoPascal.Lines.Add(s);
+  MemoPascal.Lines.Add(Format('grapheme clusters in input delimited to %d bytes:', [len]));
+  while off < len do
+  begin
+    ret := grapheme_next_character_break_utf8(@s[1 + off], len - off, CodePointsCount);
+    MemoPascal.Lines.Add(Format('%d bytes,%d code points: %s', [ret, CodePointsCount, Copy(s, 1 + off, ret)]));
+    off := off + ret;
+    Inc(Count);
+  end;
+  MemoPascal.Lines.Add(Format('grapheme count: %d', [Count]));
+end;
 
 procedure TForm1.btnLowerCaseClick(Sender: TObject);
 var
@@ -148,11 +191,13 @@ begin
   if len<=0 then
     exit;
 
+  {$ifdef COMPARE_TO_C}
   //calc len
   len2:=grapheme_dynamic.grapheme_to_lowercase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
   grapheme_dynamic.grapheme_to_lowercase_utf8(@s[1],len,@s2[1],len2+1);
   MemoC.Lines.Add(s2);
+  {$endif}
 
   len2:=grapheme_to_lowercase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
@@ -188,11 +233,13 @@ begin
   if len<=0 then
     exit;
 
+  {$ifdef COMPARE_TO_C}
   //calc len
   len2:=grapheme_dynamic.grapheme_to_titlecase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
   grapheme_dynamic.grapheme_to_titlecase_utf8(@s[1],len,@s2[1],len2+1);
   MemoC.Lines.Add(s2);
+  {$endif}
 
   len2:=grapheme_to_titlecase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
@@ -210,11 +257,13 @@ begin
   if len<=0 then
     exit;
 
+  {$ifdef COMPARE_TO_C}
   //calc len
   len2:=grapheme_dynamic.grapheme_to_uppercase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
   grapheme_dynamic.grapheme_to_uppercase_utf8(@s[1],len,@s2[1],len2+1);
   MemoC.Lines.Add(s2);
+  {$endif}
 
   len2:=grapheme_to_uppercase_utf8(@s[1],len,nil,0);
   SetLength(s2,len2);
@@ -263,12 +312,16 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  {$ifdef COMPARE_TO_C}
   LibGraphemeLoad('');
+  {$endif}
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
+ {$ifdef COMPARE_TO_C}
   LibGraphemeUnload();
+ {$endif}
 end;
 
 
@@ -299,7 +352,7 @@ begin
   end;
   MemoPascal.Lines.Add(Format('grapheme count: %d', [Count]));
 
-
+  {$ifdef COMPARE_TO_C}
   off := 0;
   Count := 0;
   MemoC.Lines.Clear;
@@ -313,7 +366,7 @@ begin
     Inc(Count);
   end;
   MemoC.Lines.Add(Format('grapheme count: %d', [Count]));
-
+  {$endif}
 
 end;
 

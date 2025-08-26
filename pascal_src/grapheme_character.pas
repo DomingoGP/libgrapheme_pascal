@@ -43,7 +43,8 @@ uses
 
 function grapheme_is_character_break(cp0: uint_least32_t; cp1: uint_least32_t; s: Puint_least16_t): boolean;
 function grapheme_next_character_break(const Astr: Puint_least32_t; len: size_t): size_t; cdecl;
-function grapheme_next_character_break_utf8(const Astr: pansichar; len: size_t): size_t;cdecl;
+function grapheme_next_character_break_utf8(const Astr: pansichar; len: size_t): size_t;cdecl;overload;
+function grapheme_next_character_break_utf8(const Astr: pansichar; len: size_t;out ACodePointsCount:size_t): size_t;cdecl;overload;
 
 
 function graphemeCountGraphemes(const Astr: rawbytestring; ACharPosStart: SizeInt = 1; ALengthInBytes: integer = -1): SizeInt; overload;
@@ -499,6 +500,31 @@ function graphemeIsEmoji(cp: uint_least32_t):boolean;
 begin
   result := graphemeGetCharBreakProperty(cp) = cbpEXTENDED_PICTOGRAPHIC;
 end;
+
+
+function grapheme_next_character_break_utf8(const Astr: pansichar; len: size_t;out ACodePointsCount:size_t): size_t;cdecl;
+var
+  r: HERODOTUS_READER;
+  state: uint_least16_t;
+  cp0, cp1: uint_least32_t;
+begin
+  state := 0;
+  cp0 := 0;
+  cp1 := 0;
+  ACodePointsCount := 0;
+  herodotus_reader_init(@r, HERODOTUS_TYPE_UTF8, Astr, len);
+  if herodotus_read_codepoint(@r, True, @cp0) = HERODOTUS_STATUS_SUCCESS then
+    inc(ACodePointsCount);
+  while herodotus_read_codepoint(@r, False, @cp1) = HERODOTUS_STATUS_SUCCESS do
+  begin
+    if grapheme_is_character_break(cp0, cp1, @state) then
+      break;
+    if herodotus_read_codepoint(@r, True, @cp0) = HERODOTUS_STATUS_SUCCESS then
+      inc(ACodePointsCount);
+  end;
+  exit(herodotus_reader_number_read(@r));
+end;
+
 
 initialization
   {$PUSH}
